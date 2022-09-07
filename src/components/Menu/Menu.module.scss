@@ -1,0 +1,61 @@
+.menu {
+    width: 223px;
+
+    .menu-item {
+        display: flex;
+        margin-left: 0px;
+        height: 42px;
+        width: 100%;
+        align-items: center;
+        justify-content: flex-start;
+        line-height: 100%;
+        border-radius: 0;
+        font-weight: 600;
+        font-family: 'ProximaNova';
+
+        &.separate {
+            padding: 10px 16px;
+            border-top: 1px solid rgba(22, 24, 35, 0.12);
+        }
+
+        &:hover {
+            background: rgba(22, 24, 35, 0.03);
+        }
+    }
+}
+
+.sub-menu {
+    overflow-y: overlay;
+}
+
+.wrapper {
+    position: relative;
+    height: 50px;
+    margin-top: -8px;
+    flex-shrink: 0;
+}
+
+.back-btn {
+    width: 50px;
+    height: 100%;
+    background-color: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    svg {
+        font-size: 20px;
+    }
+}
+
+.header-title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'ProximaNova';
+    font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 22px;
+}

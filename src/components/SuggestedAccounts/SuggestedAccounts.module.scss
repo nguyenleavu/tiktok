@@ -1,0 +1,140 @@
+.wrapper {
+    padding: 16px 0;
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+}
+
+.label {
+    padding: 0 8px;
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: rgba(22, 24, 35, 0.75);
+    font-weight: 700;
+    font-family: 'ProximaNova';
+    opacity: 0.72;
+}
+
+.account-item {
+    display: flex;
+    padding: 8px;
+    height: 48px;
+    cursor: pointer;
+
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+.avatar {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.item-info {
+    flex: 1;
+    margin-left: 12px;
+}
+
+.nickname {
+    color: rgb(22, 24, 35);
+    font-family: 'SofiaPro';
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    margin-top: -5px;
+    max-width: 260px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    span {
+        margin-left: 4px;
+    }
+}
+
+.name {
+    color: rgba(22, 24, 35, 0.75);
+    font-family: 'ProximaNova';
+    font-weight: 400;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    max-width: 260px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.more-item {
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 8px;
+    margin-top: 8px;
+    cursor: pointer;
+    color: rgb(254, 44, 85);
+    font-family: 'ProximaNova';
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+.preview {
+    width: 320px;
+    box-sizing: border-box;
+    padding: 20px;
+}
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    height: 44px;
+
+    button {
+        width: 106px;
+        height: 34px;
+    }
+}
+
+.preview-avatar {
+    height: 44px;
+    width: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.preview-nickname {
+    color: rgb(22, 24, 35);
+    font-family: 'SofiaPro';
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+    height: 28px;
+    cursor: pointer;
+    span {
+        margin-left: 4px;
+    }
+}
+
+.preview-name {
+    color: rgb(22, 24, 35);
+    font-family: 'ProximaNova';
+    font-weight: 600;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    cursor: pointer;
+}
+
+.preview-popular {
+    margin-top: 8px;
+    strong {
+        margin-right: 6px;
+    }
+
+    span {
+        margin-right: 12px;
+        color: rgba(22, 24, 35, 0.75);
+        font-size: 1.7rem;
+        line-height: 2rem;
+    }
+}

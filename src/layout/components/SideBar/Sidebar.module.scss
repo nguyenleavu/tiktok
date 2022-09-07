@@ -1,0 +1,50 @@
+.wrapper {
+    width: 348px;
+    padding: 20px 0 26px 0px;
+    height: 100vh;
+    position: fixed;
+}
+
+.wrapper2 {
+    width: 224px;
+    padding: 20px 0 26px 0px;
+    height: 100vh;
+    position: fixed;
+}
+
+.simple {
+    max-height: calc(100vh - 60px);
+    width: 472px;
+    padding-right: 124px;
+    position: fixed;
+    z-index: -1;
+}
+
+.simple2 {
+    max-height: calc(100vh - 60px);
+    width: 348px;
+    padding-right: 124px;
+    margin-right: 40px;
+    position: fixed;
+}
+
+.btn-box {
+    padding: 20px 8px 24px 8px;
+    border-top: 1px solid rgba(22, 24, 35, 0.12);
+
+    p {
+        color: rgba(22, 24, 35, 0.5);
+        font-size: 1.6rem;
+        line-height: 2.2rem;
+    }
+
+    .btn {
+        margin-top: 20px;
+        width: 99%;
+        height: 48px;
+        font-size: 1.8rem;
+        line-height: 100%;
+        font-weight: 600;
+        font-family: 'SofiaPro';
+    }
+}

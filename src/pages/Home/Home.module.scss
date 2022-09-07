@@ -1,0 +1,62 @@
+.wrapper {
+    margin-top: 20px;
+}
+
+.quang-cao {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: -1000010px;
+    z-index: 11;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+}
+
+.quang-cao-content {
+    background-color: aliceblue;
+    height: 500px;
+    width: 500px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 12px;
+    padding: 20px 20px 0 20px;
+    margin-top: 200px;
+
+    button {
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        font-size: 3rem;
+        cursor: pointer;
+        margin-left: 430px;
+        border-radius: 50%;
+        background-color: #ccc;
+
+        &:hover {
+            background-color: rgb(181, 179, 179);
+        }
+    }
+
+    h2 {
+        font-size: 4rem;
+        padding: 10px 0 30px 0;
+    }
+
+    span {
+        text-align: center;
+        text-align-last: center;
+        font-size: 2.5rem;
+        letter-spacing: 0.5px;
+    }
+
+    img {
+        padding-top: 10px;
+        background-size: cover;
+        height: 300px;
+        width: auto;
+        margin-right: 20px;
+    }
+}
