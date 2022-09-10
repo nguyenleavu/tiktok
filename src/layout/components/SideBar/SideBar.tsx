@@ -16,6 +16,7 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import Discover from '~/components/Discover/Discover';
 import Button from '~/components/Button/Button';
+import { useAppSelector } from '~/redux/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -24,6 +25,7 @@ type Props = {
 };
 
 const SideBar = ({ small }: Props) => {
+    const user = useAppSelector((state) => state.login.login?.user);
     return (
         <aside className={small ? cx('wrapper2') : cx('wrapper')}>
             <SimpleBar className={small ? cx('simple2') : cx('simple')}>
@@ -48,7 +50,7 @@ const SideBar = ({ small }: Props) => {
                     />
                 </NavBar>
                 <SuggestedAccounts label='Suggested accounts' />
-                <SuggestedAccounts label='Following accounts' />
+                {user &&<SuggestedAccounts label='Following accounts' />}
                 <Discover />
                 <Footer />
             </SimpleBar>

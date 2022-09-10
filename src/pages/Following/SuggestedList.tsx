@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import Button from '~/components/Button/Button';
 import Image from '~/components/Image/Image';
 
+
 const cx = classNames.bind(styles);
 
 type Props = {};
@@ -12,7 +13,7 @@ type Props = {};
 const SuggestedList = (props: Props) => {
     const [suggested, setSuggested] = useState<any>([]);
     const [page, setPage] = useState<number>(1);
-    const videoRef = useRef<any>();
+
 
     const fetchApi = async () => {
         request
@@ -51,6 +52,10 @@ const SuggestedList = (props: Props) => {
         e.target.pause();
     };
 
+    const handleClick = () => {
+        
+    };
+
     return (
         <div className={cx('wrapper-suggested')}>
             {suggested.map((item: any) => (
@@ -74,7 +79,11 @@ const SuggestedList = (props: Props) => {
                         <Image src={item.avatar} alt={item.nickname} />
                         <h3>{`${item.first_name} ${item.last_name}`}</h3>
                         <p>{item.nickname}</p>
-                        <Button primary className={cx('btn')}>
+                        <Button
+                            primary
+                            className={cx('btn')}
+                            onClick={handleClick}
+                        >
                             Following
                         </Button>
                     </div>

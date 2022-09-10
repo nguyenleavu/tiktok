@@ -64,6 +64,32 @@
         font-family: 'SofiaPro';
         font-weight: 600;
         margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .follow-btn {
+        display: flex;
+        align-items: center;
+
+        .unfollow {
+            width: 36px;
+            height: 36px;
+            background-color: transparent;
+            border: 1px solid rgba(22, 24, 35, 0.12);
+            border-radius: 4px;
+            margin-left: 8px;
+            margin-top: 16px;
+            cursor: pointer;
+
+            &:hover {
+                background-color: rgba(22, 24, 35, 0.03);
+            }
+        }
     }
 }
 
@@ -143,7 +169,6 @@
     justify-content: flex-start;
     flex-wrap: wrap;
     margin-bottom: 20px;
-
 }
 
 .video-box {

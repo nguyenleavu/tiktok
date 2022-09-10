@@ -12,10 +12,15 @@ export const get = async (url: string, options = {}) => {
     return response.data;
 };
 
+
 export const post = async (url: string, data = {}, headers?: any) => {
     const response = await request.post(url, data, headers);
     return response.data;
 };
 
+export const del = async (url: string, headers?: any) => {
+    const response = await request.delete(url, headers);
+    return response.data;
+};
 
 export default request;

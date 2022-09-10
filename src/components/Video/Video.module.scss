@@ -192,10 +192,10 @@
     &:hover {
         background-color: rgba(22, 24, 35, 0.1);
     }
-}
 
-.like svg {
-    fill: var(--primary);
+    path {
+        fill: var(--primary);
+    }
 }
 
 .btn-item {

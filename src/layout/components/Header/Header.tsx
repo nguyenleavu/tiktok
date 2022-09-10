@@ -1,8 +1,10 @@
 import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Modal from 'react-modal';
 import { Link, useNavigate } from 'react-router-dom';
 import 'tippy.js/dist/tippy.css';
+import images from '~/assets/images/index';
 import Button from '~/components/Button/Button';
 import {
     FeedbackIcon,
@@ -10,7 +12,6 @@ import {
     InboxIcon,
     KeyboardIcon,
     LanguageIcon,
-    LinkIcon,
     LogoutIcon,
     MessageIcon,
     MoreIcon,
@@ -20,14 +21,12 @@ import {
 } from '~/components/Icon/Icon';
 import Image from '~/components/Image/Image';
 import Menu from '~/components/Menu/Menu';
+import ModalLogin from '~/components/ModalLogin/ModalLogin';
 import config from '~/config';
+import { logOutUser } from '~/redux/apiRequest';
+import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import styles from './Header.module.scss';
 import Search from './Search/Search';
-import Modal from 'react-modal';
-import ModalLogin from '~/components/ModalLogin/ModalLogin';
-import images from '~/assets/images/index';
-import { useAppDispatch, useAppSelector } from '~/redux/hooks';
-import { logOutUser } from '~/redux/apiRequest';
 
 Modal.setAppElement('#modal-root');
 const cx = classNames.bind(styles);

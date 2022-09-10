@@ -1,3 +1,4 @@
+import { getSuggestedQuery } from '@testing-library/react';
 import * as request from '~/utils/request';
 import {
     loginStart,
@@ -78,6 +79,30 @@ export const postVideo = async (
         navigate('/');
     } catch (error) {
         dispatch(videoError());
+        console.log(error);
+    }
+};
+export const follow = async (id: any, token: any) => {
+    try {
+        await request.post(`users/${id}/follow`, id, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};
+export const unFollow = async (id: any, token: any) => {
+    try {
+        await request.post(`users/${id}/unfollow`, id, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`,
+            },
+        });
+    } catch (error) {
         console.log(error);
     }
 };

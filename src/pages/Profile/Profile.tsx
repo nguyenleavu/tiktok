@@ -1,12 +1,15 @@
-import { useParams } from 'react-router-dom';
 import classNames from 'classnames/bind';
-import styles from './Profile.module.scss';
-import Image from '~/components/Image/Image';
+import { useEffect, useState } from 'react';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import Button from '~/components/Button/Button';
-import { CheckIcon, LinkIcon } from '~/components/Icon/Icon';
-import { useEffect, useRef, useState } from 'react';
-import * as request from '~/utils/request';
+import { CheckIcon, LinkIcon, UnFollowIcon } from '~/components/Icon/Icon';
+import Image from '~/components/Image/Image';
 import { useAppSelector } from '~/redux/hooks';
+import * as request from '~/utils/request';
+import styles from './Profile.module.scss';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
+import { follow, unFollow } from '~/redux/apiRequest';
 
 const cx = classNames.bind(styles);
 
@@ -14,29 +17,55 @@ type Props = {};
 
 const Profile = (props: Props) => {
     const { nickname } = useParams();
-    const videoRef = useRef<any>();
     const [user, setUser] = useState<any>([]);
-    const currentUser = useAppSelector(
-        (state) => state.login.login?.currentUser
-    );
+    const [followed, setFollowed] = useState(false);
+
+    const navigate = useNavigate();
+    const currentUser = useAppSelector((state) => state.login.login?.user);
 
     useEffect(() => {
-        const fetchApi = async () => {
-            request
-                .get(`users/@${nickname}`)
-                .then((res) => {
-                    setUser(res.data);
-                })
-                .catch(() => {});
-        };
-        fetchApi();
-    }, [nickname]);
+        if (currentUser) {
+            const fetchApi = async () => {
+                request
+                    .get(`users/@${nickname}`, {
+                        headers: {
+                            Authorization: `Bearer ${currentUser.meta.token}`,
+                        },
+                    })
+                    .then((res) => {
+                        setUser(res.data);
+                    })
+                    .catch(() => {});
+            };
+
+            fetchApi();
+        } else {
+            const fetchApi = async () => {
+                request
+                    .get(`users/@${nickname}`)
+                    .then((res) => {
+                        setUser(res.data);
+                    })
+                    .catch(() => {});
+            };
+
+            fetchApi();
+        }
+    }, [nickname, followed]);
 
     const handleOnHover = (e: any) => {
         e.target.play();
     };
     const handleOnLeave = (e: any) => {
         e.target.pause();
+    };
+    const handleFollow = () => {
+        follow(user.id, currentUser.meta.token);
+        setFollowed(!followed);
+    };
+    const handleUnFollow = () => {
+        unFollow(user.id, currentUser.meta.token);
+        setFollowed(!followed);
     };
 
     return (
@@ -54,10 +83,42 @@ const Profile = (props: Props) => {
                             )}
                         </h2>
                         <h1>{`${user.first_name} ${user.last_name}`}</h1>
-                        {user.is_followed ? (
-                            <Button outline className={cx('btn')}>
-                                Messenger
-                            </Button>
+                        {currentUser ? (
+                            <div>
+                                {nickname === currentUser.data.nickname ? (
+                                    <Button text className={cx('btn')}>
+                                        Edit profile
+                                    </Button>
+                                ) : user.is_followed ? (
+                                    <div className={cx('follow-btn')}>
+                                        <Button outline className={cx('btn')}>
+                                            Messenger
+                                        </Button>
+
+                                        <Tippy
+                                            content='Unfollow'
+                                            placement='bottom'
+                                        >
+                                            <button
+                                                className={cx('unfollow')}
+                                                onClick={handleUnFollow}
+                                            >
+                                                <span>
+                                                    <UnFollowIcon />
+                                                </span>
+                                            </button>
+                                        </Tippy>
+                                    </div>
+                                ) : (
+                                    <Button
+                                        primary
+                                        className={cx('btn')}
+                                        onClick={handleFollow}
+                                    >
+                                        Follow
+                                    </Button>
+                                )}
+                            </div>
                         ) : (
                             <Button primary className={cx('btn')}>
                                 Follow
@@ -103,6 +164,9 @@ const Profile = (props: Props) => {
                                     className={cx('video')}
                                     onMouseOver={handleOnHover}
                                     onMouseLeave={handleOnLeave}
+                                    onClick={() =>
+                                        navigate(`/videos/${video.uuid}`)
+                                    }
                                 >
                                     <source
                                         src={video.file_url}

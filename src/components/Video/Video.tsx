@@ -1,21 +1,18 @@
 import classNames from 'classnames/bind';
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useElementOnScreen } from '~/hook';
 import {
-    CMTIcon,
-    HeartIcon,
     MusicIcon,
     OffVolumeIcon,
     PlayIcon,
-    ShareIcon,
     StopIcon,
     VolumeIcon,
 } from '../Icon/Icon';
 import Image from '../Image/Image';
 import styles from './Video.module.scss';
-import * as request from '~/utils/request';
-import { useAppSelector } from '~/redux/hooks';
+
+import ButtonVideo from './ButtonVideo';
 
 const cx = classNames.bind(styles);
 
@@ -30,8 +27,7 @@ const Video = ({ data = [] }: Props) => {
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(true);
     const [offVolume, setOffVolume] = useState(false);
-    const [liked, setLiked] = useState(false);
-    const user = useAppSelector((state) => state.login.login?.user);
+    const navigate = useNavigate();
 
     const handleVideos = () => {
         if (playing) {
@@ -90,15 +86,6 @@ const Video = ({ data = [] }: Props) => {
         videoRef.current.volume = e.target.value / 100;
     };
 
-    const handleLike = () => {
-        setLiked(!liked);
-        // request.post('posts/1/like/', data.id, {
-        //     header: {
-        //         Authorization: `Bearer ${user.meta.token}`,
-        //     },
-        // });
-    };
-
     return (
         <div className={cx('wrapper-all')}>
             <div className={cx('wrapper')}>
@@ -130,7 +117,6 @@ const Video = ({ data = [] }: Props) => {
             <div className={cx('video-item')}>
                 <div className={cx('video-box')}>
                     <video
-                        id='video'
                         loop
                         muted={muted}
                         preload='auto'
@@ -138,6 +124,7 @@ const Video = ({ data = [] }: Props) => {
                         className={cx('video')}
                         poster={data.thumb_url || 0}
                         onClick={handleVideos}
+                        onDoubleClick={() => navigate(`/videos/${data.uuid}`)}
                     >
                         <source src={data.file_url} type='video/mp4' />
                     </video>
@@ -168,29 +155,7 @@ const Video = ({ data = [] }: Props) => {
                         </div>
                     </div>
                 </div>
-                <div className={cx('btn')}>
-                    <div className={cx('btn-item')}>
-                        <span
-                            className={liked ? cx('liked') : cx('icon')}
-                            onClick={handleLike}
-                        >
-                            <HeartIcon />
-                        </span>
-                        <strong>{data.likes_count}</strong>
-                    </div>
-                    <div className={cx('btn-item')}>
-                        <span className={cx('icon')}>
-                            <CMTIcon />
-                        </span>
-                        <strong>{data.comments_count}</strong>
-                    </div>
-                    <div className={cx('btn-item')}>
-                        <span className={cx('icon')}>
-                            <ShareIcon />
-                        </span>
-                        <strong>{data.shares_count}</strong>
-                    </div>
-                </div>
+                <ButtonVideo data={data} />
             </div>
         </div>
     );

@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '~/redux/hooks';
 import * as request from '~/utils/request';
 import styles from './SuggestedAccounts.module.scss';
 import SuggestedItem from './SuggestedItem';
@@ -11,10 +12,11 @@ type Props = {
     label: string;
 };
 
-const SuggestedAccounts = ({ label}: Props) => {
+const SuggestedAccounts = ({ label }: Props) => {
     const [suggestedAccounts, setSuggestedAccounts] = useState<any>([]);
     const [showMore, setShowMore] = useState<number>(5);
     const [showLess, setShowLess] = useState(false);
+    const user = useAppSelector((state) => state.login.login?.user);
 
     useEffect(() => {
         if (label === 'Suggested accounts') {
@@ -33,7 +35,24 @@ const SuggestedAccounts = ({ label}: Props) => {
             };
             fetchApi();
         } else if (label === 'Following accounts') {
-            setSuggestedAccounts([]);
+            if (label === 'Following accounts') {
+                const fetchApi = async () => {
+                    request
+                        .get('me/followings', {
+                            params: {
+                                page: 1,
+                            },
+                            headers: {
+                                Authorization: `Bearer ${user.meta.token}`,
+                            },
+                        })
+                        .then((res) => {
+                            setSuggestedAccounts(res.data);
+                        })
+                        .catch(() => {});
+                };
+                fetchApi();
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [showMore]);
