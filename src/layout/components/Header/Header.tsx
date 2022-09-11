@@ -25,6 +25,7 @@ import ModalLogin from '~/components/ModalLogin/ModalLogin';
 import config from '~/config';
 import { logOutUser } from '~/redux/apiRequest';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
+import { modalLogin } from '~/redux/modalLoginSlice';
 import styles from './Header.module.scss';
 import Search from './Search/Search';
 
@@ -47,6 +48,10 @@ const Header = ({ small }: Props) => {
             logOutUser(user.id, dispatch, user.meta.token, navigate);
         }
     };
+    const login = useAppSelector((state) => state.modalLogin.modalLogin);
+    useEffect(() => {
+        setIsOpen(login);
+    }, [isOpen]);
 
     const MENU_ITEM = [
         {
@@ -138,11 +143,13 @@ const Header = ({ small }: Props) => {
     };
 
     function openModal() {
-        setIsOpen(true);
+        setIsOpen(true);    
+        dispatch(modalLogin(true));
     }
 
     function closeModal() {
         setIsOpen(false);
+        dispatch(modalLogin(false));
     }
 
     const scrollToTop = () => {

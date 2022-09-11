@@ -8,6 +8,7 @@ import {
     logoutError,
     logoutSuccess,
 } from './loginSlice';
+import { modalLogin } from './modalLoginSlice';
 import { registerError, registerStart, registerSuccess } from './registerSlice';
 import { videoError, videoStart, videoSuccess } from './videoSlice';
 
@@ -22,7 +23,6 @@ export const loginUser = async (
         const res = await request.post('auth/login', user);
         dispatch(loginSuccess(res));
         navigate('/');
-        window.location.reload();
         onClose();
     } catch (error) {
         dispatch(loginError());
@@ -106,4 +106,3 @@ export const unFollow = async (id: any, token: any) => {
         console.log(error);
     }
 };
-

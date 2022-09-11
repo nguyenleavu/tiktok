@@ -4,12 +4,13 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import { CheckIcon, LinkIcon, UnFollowIcon } from '~/components/Icon/Icon';
 import Image from '~/components/Image/Image';
-import { useAppSelector } from '~/redux/hooks';
+import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import * as request from '~/utils/request';
 import styles from './Profile.module.scss';
 import Tippy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
 import { follow, unFollow } from '~/redux/apiRequest';
+import { modalLogin } from '~/redux/modalLoginSlice';
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +22,7 @@ const Profile = (props: Props) => {
     const [followed, setFollowed] = useState(false);
 
     const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const currentUser = useAppSelector((state) => state.login.login?.user);
 
     useEffect(() => {
@@ -66,6 +68,10 @@ const Profile = (props: Props) => {
     const handleUnFollow = () => {
         unFollow(user.id, currentUser.meta.token);
         setFollowed(!followed);
+    };
+    const handleClick = () => {
+        dispatch(modalLogin(true));
+        window.location.reload();
     };
 
     return (
@@ -120,7 +126,11 @@ const Profile = (props: Props) => {
                                 )}
                             </div>
                         ) : (
-                            <Button primary className={cx('btn')}>
+                            <Button
+                                primary
+                                className={cx('btn')}
+                                onClick={handleClick}
+                            >
                                 Follow
                             </Button>
                         )}

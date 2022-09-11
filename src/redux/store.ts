@@ -7,6 +7,7 @@ import {
 import loginReducer from './loginSlice';
 import registerReducer from './registerSlice';
 import videoReducer from './videoSlice';
+import modalLoginReducer from './modalLoginSlice';
 import {
     persistStore,
     persistReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
     login: loginReducer,
     register: registerReducer,
     video: videoReducer,
+    modalLogin: modalLoginReducer,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

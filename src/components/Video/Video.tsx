@@ -13,6 +13,8 @@ import Image from '../Image/Image';
 import styles from './Video.module.scss';
 
 import ButtonVideo from './ButtonVideo';
+import { useAppDispatch, useAppSelector } from '~/redux/hooks';
+import { modalLogin } from '~/redux/modalLoginSlice';
 
 const cx = classNames.bind(styles);
 
@@ -27,7 +29,10 @@ const Video = ({ data = [] }: Props) => {
     const [playing, setPlaying] = useState(false);
     const [muted, setMuted] = useState(true);
     const [offVolume, setOffVolume] = useState(false);
+
     const navigate = useNavigate();
+    const user = useAppSelector((state) => state.login.login?.user);
+    const dispatch = useAppDispatch();
 
     const handleVideos = () => {
         if (playing) {
@@ -85,6 +90,10 @@ const Video = ({ data = [] }: Props) => {
     const changeRange = (e: any) => {
         videoRef.current.volume = e.target.value / 100;
     };
+    const handleClick = () => {
+        dispatch(modalLogin(true));
+        window.location.reload();
+    };
 
     return (
         <div className={cx('wrapper-all')}>
@@ -124,7 +133,11 @@ const Video = ({ data = [] }: Props) => {
                         className={cx('video')}
                         poster={data.thumb_url || 0}
                         onClick={handleVideos}
-                        onDoubleClick={() => navigate(`/videos/${data.uuid}`)}
+                        onDoubleClick={
+                            user
+                                ? () => navigate(`/videos/${data.uuid}`)
+                                : handleClick
+                        }
                     >
                         <source src={data.file_url} type='video/mp4' />
                     </video>

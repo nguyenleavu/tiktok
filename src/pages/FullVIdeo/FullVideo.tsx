@@ -9,8 +9,7 @@ import {
     MusicIcon,
     OffVolumeIcon,
     ShareIcon,
-
-    VolumeIcon
+    VolumeIcon,
 } from '~/components/Icon/Icon';
 import Image from '~/components/Image/Image';
 import { useAppSelector } from '~/redux/hooks';
@@ -27,6 +26,7 @@ const FullVideo = (props: Props) => {
     const [textInput, setTextInput] = useState<string>('');
     const [cmt, setCmt] = useState(false);
     const [offVolume, setOffVolume] = useState(false);
+    const [like, setLike] = useState(false);
 
     const inputRef = useRef<any>();
     const videoRef = useRef<any>();
@@ -43,7 +43,7 @@ const FullVideo = (props: Props) => {
                 .then((res) => setVideo(res.data));
         };
         fetchApi();
-    }, [cmt]);
+    }, []);
 
     const handleVideos = () => {
         if (playing) {
@@ -68,7 +68,8 @@ const FullVideo = (props: Props) => {
     };
 
     const handleLike = () => {
-        if (video.is_liked) {
+        setLike(!like);
+        if (like) {
             request.post(`videos/${video.id}/unlike`, uuid, {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
@@ -77,7 +78,6 @@ const FullVideo = (props: Props) => {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
         }
-        setCmt(!cmt);
     };
 
     useEffect(() => {
@@ -175,7 +175,7 @@ const FullVideo = (props: Props) => {
                                 <div className={cx('like-cmt')}>
                                     <button
                                         className={
-                                            video.is_liked
+                                            like
                                                 ? cx('like-btn')
                                                 : cx('unlike-btn')
                                         }
@@ -183,7 +183,11 @@ const FullVideo = (props: Props) => {
                                     >
                                         <HeartIcon />
                                     </button>
-                                    <strong>{video.likes_count}</strong>
+                                    <strong>
+                                        {like
+                                            ? video.likes_count + 1
+                                            : video.likes_count}
+                                    </strong>
                                     <button>
                                         <CMTIcon />
                                     </button>

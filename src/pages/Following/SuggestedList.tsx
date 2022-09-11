@@ -4,7 +4,8 @@ import styles from './Following.module.scss';
 import classNames from 'classnames/bind';
 import Button from '~/components/Button/Button';
 import Image from '~/components/Image/Image';
-
+import { useAppDispatch } from '~/redux/hooks';
+import { modalLogin } from '~/redux/modalLoginSlice';
 
 const cx = classNames.bind(styles);
 
@@ -13,7 +14,9 @@ type Props = {};
 const SuggestedList = (props: Props) => {
     const [suggested, setSuggested] = useState<any>([]);
     const [page, setPage] = useState<number>(1);
+    const [open, setOpen] = useState(false);
 
+    const dispatch = useAppDispatch();
 
     const fetchApi = async () => {
         request
@@ -53,7 +56,8 @@ const SuggestedList = (props: Props) => {
     };
 
     const handleClick = () => {
-        
+        dispatch(modalLogin(true));
+        window.location.reload();
     };
 
     return (

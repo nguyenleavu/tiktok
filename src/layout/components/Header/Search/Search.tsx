@@ -49,7 +49,7 @@ const Search = (props: Props) => {
                 .get('users/search', {
                     params: {
                         q: debounced,
-                        type: 'less',
+                        type: 'more',
                     },
                 })
                 .then((res) => {

@@ -13,6 +13,7 @@ const Following = () => {
     const [page, setPage] = useState<number>(1);
 
     const user = useAppSelector((state) => state.login.login?.user);
+
     const fetchApi = async () => {
         if (user) {
             request

@@ -2,9 +2,10 @@ import classNames from 'classnames/bind';
 import { CMTIcon, HeartIcon, ShareIcon } from '../Icon/Icon';
 import styles from './Video.module.scss';
 import * as request from '~/utils/request';
-import { useAppSelector } from '~/redux/hooks';
+import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { modalLogin } from '~/redux/modalLoginSlice';
 
 const cx = classNames.bind(styles);
 
@@ -15,7 +16,7 @@ type Props = {
 const ButtonVideo = ({ data }: Props) => {
     const [like, setLike] = useState(false);
     const user = useAppSelector((state) => state.login.login?.user);
-
+    const dispatch = useAppDispatch();
     const handleLike = () => {
         if (user) {
             setLike(!like);
@@ -29,6 +30,10 @@ const ButtonVideo = ({ data }: Props) => {
                 });
             }
         }
+    };
+    const handleClick = () => {
+        dispatch(modalLogin(true));
+        window.location.reload();
     };
     return (
         <div className={cx('btn')}>
@@ -44,9 +49,15 @@ const ButtonVideo = ({ data }: Props) => {
                 </strong>
             </div>
             <div className={cx('btn-item')}>
-                <Link to={`/videos/${data.uuid}`} className={cx('icon')}>
-                    <CMTIcon />
-                </Link>
+                {user ? (
+                    <Link to={`/videos/${data.uuid}`} className={cx('icon')}>
+                        <CMTIcon />
+                    </Link>
+                ) : (
+                    <span className={cx('icon')} onClick={handleClick}>
+                        <CMTIcon />
+                    </span>
+                )}
                 <strong>{data.comments_count}</strong>
             </div>
             <div className={cx('btn-item')}>
