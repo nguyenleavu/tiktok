@@ -54,6 +54,7 @@ const Home = (props: Props) => {
         };
         fetchApi();
         window.addEventListener('scroll', handleScroll);
+        document.title='TikTok - Make Your Day'
     }, [page]);
 
     const handleScroll = (e: any) => {

@@ -1,7 +1,6 @@
 import Tippy from '@tippyjs/react/headless';
-import { useState } from 'react';
-import { SelectIcon } from '~/components/Icon/Icon';
 import classNames from 'classnames/bind';
+import { SelectIcon } from '~/components/Icon/Icon';
 import styles from './Upload.module.scss';
 
 const cx = classNames.bind(styles);

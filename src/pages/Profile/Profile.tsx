@@ -54,6 +54,9 @@ const Profile = (props: Props) => {
             fetchApi();
         }
     }, [nickname, followed]);
+    useEffect(() => {
+        document.title = `TikTok - ${nickname}`;
+    }, [nickname]);
 
     const handleOnHover = (e: any) => {
         e.target.play();

@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '~/components/Button/Button';
 import { MusicIcon } from '~/components/Icon/Icon';
@@ -45,6 +45,10 @@ const Upload = (props: Props) => {
         };
         postVideo(post, dispatch, user.meta.token, navigate);
     };
+
+    useEffect(() => {
+        document.title = 'Upload | TikTok';
+    }, []);
 
     return (
         <div className={cx('wrapper')}>

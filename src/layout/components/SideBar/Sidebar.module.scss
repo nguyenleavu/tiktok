@@ -48,3 +48,9 @@
         font-family: 'SofiaPro';
     }
 }
+
+@media only screen and (max-width: 768px) {
+    .wrapper {
+        display: none;
+    }
+}

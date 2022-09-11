@@ -44,6 +44,8 @@ const Following = () => {
     useEffect(() => {
         fetchApi();
         window.addEventListener('scroll', handleScroll);
+        document.title =
+            'Following - Watch videos from creators you follow | TikTok';
     }, [page]);
 
     return (
