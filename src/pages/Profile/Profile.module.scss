@@ -197,3 +197,201 @@
     color: rgba(22, 24, 35, 1);
     font-family: 'ProximaNova';
 }
+
+.wrapper-edit {
+    height: 660px;
+    width: 660px;
+    border-radius: 8px;
+}
+
+.edit-title {
+    font-family: 'ProximaNova';
+    font-weight: 600;
+    font-size: 2.4rem;
+    padding: 4px 4px 12px;
+    line-height: 36px;
+    color: rgb(22, 24, 35);
+    border-bottom: 0.5px solid rgba(22, 24, 35, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgb(22, 24, 35);
+
+    button {
+        background-color: transparent;
+        cursor: pointer;
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+    }
+}
+
+.edit-profile {
+    display: flex;
+    padding: 16px 0px;
+    border-bottom: 1px solid rgba(22, 24, 35, 0.12);
+
+    .edit-img {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            height: 96px;
+            width: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            margin-right: 150px;
+        }
+        .edit-btn {
+            position: absolute;
+            margin-right: 70px;
+            margin-top: 70px;
+            border: 1px solid rgba(22, 24, 35, 0.12);
+            background-color: white;
+            height: 32px;
+            width: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    }
+}
+
+.edit-p {
+    width: 144px;
+    height: 96px;
+    font-family: 'ProximaNova';
+    font-weight: 600;
+    line-height: 2.4rem;
+    font-size: 1.6rem;
+}
+.edit-input {
+    width: 360px;
+    height: 38px;
+    border-radius: 4px;
+    background: rgba(22, 24, 35, 0.06);
+    caret-color: rgb(254, 44, 85);
+    font-size: 1.6rem;
+    color: rgb(22, 24, 35);
+    line-height: 2.4rem;
+    outline: none;
+    border: none;
+    padding: 7px 12px;
+    box-sizing: border-box;
+
+    &:focus {
+        background: rgba(22, 24, 35, 0.06);
+        outline: rgba(22, 24, 35, 0.2) solid 1.5px;
+    }
+}
+
+.edit-details {
+    font-size: 1.2rem;
+    color: rgba(22, 24, 35, 0.75);
+    line-height: 1.8rem;
+    margin-top: 16px;
+    max-width: 360px;
+    overflow: hidden;
+}
+
+.edit-bio {
+    width: 360px;
+    height: 100px;
+    border-radius: 4px;
+    background: rgba(22, 24, 35, 0.06);
+    caret-color: rgb(254, 44, 85);
+    font-size: 1.6rem;
+    color: rgb(22, 24, 35);
+    line-height: 2.4rem;
+    outline: none;
+    border: none;
+    padding: 7px 12px;
+    box-sizing: border-box;
+
+    &:focus {
+        background: rgba(22, 24, 35, 0.06);
+        outline: rgba(22, 24, 35, 0.2) solid 1.5px;
+    }
+}
+
+.edit-button {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 78px;
+    width: 100%;
+
+    .edit-button-close {
+        color: rgb(22, 24, 35);
+        border: 1px solid rgba(22, 24, 35, 0.12);
+        background-color: rgb(255, 255, 255);
+        min-height: 28px;
+        font-family: 'ProximaNova';
+        font-size: 1.4rem;
+        font-weight: 600;
+        padding: 7px 16px;
+        width: 96px;
+        height: 36px;
+        margin-right: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+            border-color: rgb(208, 209, 211);
+            background-color: rgb(248, 248, 248);
+        }
+    }
+    .edit-button-save-disabled {
+        border: 1px solid;
+        min-height: 28px;
+        font-family: 'ProximaNova';
+        font-size: 1.4rem;
+        font-weight: 600;
+        padding: 7px 16px;
+        width: 96px;
+        height: 36px;
+        margin-right: 16px;
+        border-radius: 4px;
+        border: none;
+        color: rgba(22, 24, 35, 0.34);
+        background-color: rgba(22, 24, 35, 0.06);
+        pointer-events: none;
+    }
+
+    .edit-button-save {
+        border: 1px solid;
+        min-height: 28px;
+        font-family: 'ProximaNova';
+        font-size: 1.4rem;
+        font-weight: 600;
+        padding: 7px 16px;
+        width: 96px;
+        height: 36px;
+        margin-right: 16px;
+        border-radius: 4px;
+        border: none;
+        color: rgb(255, 255, 255);
+        background-color: rgb(254, 44, 85);
+        cursor: pointer;
+
+        &:hover {
+            background: linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.06),
+                    rgba(0, 0, 0, 0.06)
+                ),
+                rgb(254, 44, 85);
+        }
+    }
+}
+
+.edit-file {
+    position: absolute;
+    transform: translateX(-110px);
+    height: 20px;
+    opacity: 0;
+    cursor: pointer;
+}

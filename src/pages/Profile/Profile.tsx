@@ -12,8 +12,24 @@ import { modalLogin } from '~/redux/modalLoginSlice';
 import * as request from '~/utils/request';
 import styles from './Profile.module.scss';
 import { UserType, VideoType } from '~/config/@type/type';
+import Modal from 'react-modal';
+import EditProfile from './EditProfile';
+Modal.setAppElement('#modal-root');
 
 const cx = classNames.bind(styles);
+
+const customStyles = {
+    overlay: { backgroundColor: 'rgba(0, 0, 0, 0.5)' },
+    content: {
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+        borderRadius: '8px',
+    },
+};
 
 type Props = {};
 
@@ -22,8 +38,7 @@ const Profile = (props: Props) => {
 
     const [user, setUser] = useState<UserType | any>({});
     const [followed, setFollowed] = useState(false);
-
-    console.log(user);
+    const [isOpen, setIsOpen] = useState(false);
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -80,6 +95,15 @@ const Profile = (props: Props) => {
         dispatch(modalLogin(true));
         window.location.reload();
     };
+    function openModal() {
+        setIsOpen(true);
+        dispatch(modalLogin(true));
+    }
+
+    function closeModal() {
+        setIsOpen(false);
+        dispatch(modalLogin(false));
+    }
 
     return (
         <div className={cx('wrapper')}>
@@ -99,7 +123,11 @@ const Profile = (props: Props) => {
                         {currentUser ? (
                             <div>
                                 {nickname === currentUser.data.nickname ? (
-                                    <Button text className={cx('btn')}>
+                                    <Button
+                                        text
+                                        className={cx('btn')}
+                                        onClick={() => setIsOpen(true)}
+                                    >
                                         Edit profile
                                     </Button>
                                 ) : user.is_followed ? (
@@ -202,6 +230,9 @@ const Profile = (props: Props) => {
                         ))}
                 </div>
             </div>
+            <Modal isOpen={isOpen} style={customStyles}>
+                <EditProfile onClose={() => closeModal()} user={user} />
+            </Modal>
         </div>
     );
 };
