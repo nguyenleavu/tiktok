@@ -1,16 +1,17 @@
+import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
-import { Navigate, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import 'tippy.js/dist/tippy.css';
 import Button from '~/components/Button/Button';
 import { CheckIcon, LinkIcon, UnFollowIcon } from '~/components/Icon/Icon';
 import Image from '~/components/Image/Image';
+import { follow, unFollow } from '~/redux/apiRequest';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
+import { modalLogin } from '~/redux/modalLoginSlice';
 import * as request from '~/utils/request';
 import styles from './Profile.module.scss';
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css';
-import { follow, unFollow } from '~/redux/apiRequest';
-import { modalLogin } from '~/redux/modalLoginSlice';
+import { UserType, VideoType } from '~/config/@type/type';
 
 const cx = classNames.bind(styles);
 
@@ -18,8 +19,11 @@ type Props = {};
 
 const Profile = (props: Props) => {
     const { nickname } = useParams();
-    const [user, setUser] = useState<any>([]);
+
+    const [user, setUser] = useState<UserType | any>({});
     const [followed, setFollowed] = useState(false);
+
+    console.log(user);
 
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -167,7 +171,7 @@ const Profile = (props: Props) => {
                 <p>Videos</p>
                 <div className={cx('video-list')}>
                     {user.videos &&
-                        user.videos.map((video: any) => (
+                        user.videos.map((video: VideoType) => (
                             <div key={video.id} className={cx('video-box')}>
                                 <video
                                     loop

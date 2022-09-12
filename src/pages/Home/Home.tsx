@@ -1,18 +1,17 @@
-import styles from './Home.module.scss';
 import classNames from 'classnames/bind';
-import Video from '~/components/Video/Video';
-import * as request from '~/utils/request';
 import { useEffect, useState } from 'react';
-import Image from '~/components/Image/Image';
-import images from '~/assets/images';
+import Video from '~/components/Video/Video';
 import { useAppSelector } from '~/redux/hooks';
+import * as request from '~/utils/request';
+import styles from './Home.module.scss';
+import { VideoType } from '~/config/@type/type';
 
 const cx = classNames.bind(styles);
 
 type Props = {};
 
 const Home = (props: Props) => {
-    const [video, setVideo] = useState<any>([]);
+    const [video, setVideo] = useState<VideoType[]>([]);
     const [page, setPage] = useState<number>(1);
 
     const user = useAppSelector((state) => state.login.login?.user);
@@ -31,9 +30,9 @@ const Home = (props: Props) => {
                         },
                     })
                     .then((res) => {
-                        const data: any = [];
-                        res.data.forEach((item: any) => data.push(item));
-                        setVideo((prev: any) => [...prev, ...data]);
+                        const data: VideoType[] = [];
+                        res.data.forEach((item: VideoType) => data.push(item));
+                        setVideo((prev: VideoType[]) => [...prev, ...data]);
                     })
                     .catch(() => {});
             } else {
@@ -45,16 +44,16 @@ const Home = (props: Props) => {
                         },
                     })
                     .then((res) => {
-                        const data: any = [];
-                        res.data.forEach((item: any) => data.push(item));
-                        setVideo((prev: any) => [...prev, ...data]);
+                        const data: VideoType[] = [];
+                        res.data.forEach((item: VideoType) => data.push(item));
+                        setVideo((prev: VideoType[]) => [...prev, ...data]);
                     })
                     .catch(() => {});
             }
         };
         fetchApi();
-        window.addEventListener('scroll', handleScroll);
-        document.title='TikTok - Make Your Day'
+        window.addEventListener('scroll', (e) => handleScroll(e));
+        document.title = 'TikTok - Make Your Day';
     }, [page]);
 
     const handleScroll = (e: any) => {
@@ -69,7 +68,7 @@ const Home = (props: Props) => {
     return (
         <div className={cx('wrapper')}>
             {video &&
-                video.map((item: any, index: number) => (
+                video.map((item: VideoType, index: number) => (
                     <Video key={index} data={item} />
                 ))}
         </div>

@@ -6,17 +6,20 @@ import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { modalLogin } from '~/redux/modalLoginSlice';
+import { VideoType } from '~/config/@type/type';
 
 const cx = classNames.bind(styles);
 
 type Props = {
-    data: any;
+    data: VideoType;
 };
 
 const ButtonVideo = ({ data }: Props) => {
     const [like, setLike] = useState(false);
+
     const user = useAppSelector((state) => state.login.login?.user);
     const dispatch = useAppDispatch();
+    
     const handleLike = () => {
         if (user) {
             setLike(!like);

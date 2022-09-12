@@ -15,14 +15,15 @@ import styles from './Video.module.scss';
 import ButtonVideo from './ButtonVideo';
 import { useAppDispatch, useAppSelector } from '~/redux/hooks';
 import { modalLogin } from '~/redux/modalLoginSlice';
+import { VideoType } from '~/config/@type/type';
 
 const cx = classNames.bind(styles);
 
 type Props = {
-    data: any;
+    data: VideoType;
 };
 
-const Video = ({ data = [] }: Props) => {
+const Video = ({ data }: Props) => {
     const videoRef = useRef<any>();
     const volumeRef = useRef<any>();
 
@@ -131,7 +132,7 @@ const Video = ({ data = [] }: Props) => {
                         preload='auto'
                         ref={videoRef}
                         className={cx('video')}
-                        poster={data.thumb_url || 0}
+                        poster={data.thumb_url}
                         onClick={handleVideos}
                         onDoubleClick={
                             user

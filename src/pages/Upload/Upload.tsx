@@ -17,6 +17,7 @@ const Upload = (props: Props) => {
     const [checked, setChecked] = useState(true);
     const [isFilePicked, setIsFilePicked] = useState(false);
     const [option, setOption] = useState('Public');
+    
     const inputRef = useRef<any>();
     const videoRef = useRef<any>();
 
