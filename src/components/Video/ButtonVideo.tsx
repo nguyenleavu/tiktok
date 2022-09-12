@@ -19,7 +19,7 @@ const ButtonVideo = ({ data }: Props) => {
 
     const user = useAppSelector((state) => state.login.login?.user);
     const dispatch = useAppDispatch();
-    
+
     const handleLike = () => {
         if (user) {
             setLike(!like);
@@ -43,7 +43,7 @@ const ButtonVideo = ({ data }: Props) => {
             <div className={cx('btn-item')}>
                 <span
                     className={like ? cx('liked') : cx('icon')}
-                    onClick={handleLike}
+                    onClick={user ? handleLike : handleClick}
                 >
                     <HeartIcon />
                 </span>
