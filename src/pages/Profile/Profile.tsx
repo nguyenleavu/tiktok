@@ -177,8 +177,13 @@ const Profile = (props: Props) => {
                                     className={cx('video')}
                                     onMouseOver={handleOnHover}
                                     onMouseLeave={handleOnLeave}
-                                    onClick={() =>
-                                        navigate(`/videos/${video.uuid}`)
+                                    onClick={
+                                        currentUser
+                                            ? () =>
+                                                  navigate(
+                                                      `/videos/${video.uuid}`
+                                                  )
+                                            : handleClick
                                     }
                                 >
                                     <source
