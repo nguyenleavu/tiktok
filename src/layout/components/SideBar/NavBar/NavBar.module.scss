@@ -34,3 +34,10 @@
 .active-icon {
     display: none;
 }
+
+@media only screen and (max-width: 768px) {
+    .active-icon,
+    .nav-title {
+        display: none;
+    }
+}

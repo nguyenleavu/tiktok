@@ -51,6 +51,24 @@
 
 @media only screen and (max-width: 768px) {
     .wrapper {
-        display: none;
+        width: 55px;
+        left: 0;
+        box-shadow: 0px 2px 8px rgb(0 0 0 / 6%);
+    }
+
+    .wrapper2 {
+        width: 55px;
+        left: 0;
+        box-shadow: 0px 2px 8px rgb(0 0 0 / 6%);
+    }
+
+    .simple {
+        width: 55px;
+        padding: 0;
+    }
+
+    .simple2 {
+        width: 55px;
+        padding: 0;
     }
 }

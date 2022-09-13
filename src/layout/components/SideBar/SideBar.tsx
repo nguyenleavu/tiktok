@@ -50,7 +50,7 @@ const SideBar = ({ small }: Props) => {
                     />
                 </NavBar>
                 <SuggestedAccounts label='Suggested accounts' />
-                {user &&<SuggestedAccounts label='Following accounts' />}
+                {user && <SuggestedAccounts label='Following accounts' />}
                 <Discover />
                 <Footer />
             </SimpleBar>

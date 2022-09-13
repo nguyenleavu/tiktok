@@ -62,12 +62,10 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .wrapper{
-        width: 100vw;
+    .wrapper {
         height: auto;
         display: flex;
         align-items: center;
         flex-direction: column;
-        transform: translateX(50px);
     }
 }
