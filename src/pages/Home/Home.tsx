@@ -5,6 +5,7 @@ import { useAppSelector } from '~/redux/hooks';
 import * as request from '~/utils/request';
 import styles from './Home.module.scss';
 import { VideoType } from '~/config/@type/type';
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 const cx = classNames.bind(styles);
 
@@ -31,9 +32,7 @@ const Home = (props: Props) => {
                         },
                     })
                     .then((res) => {
-                        const data: VideoType[] = [];
-                        res.data.forEach((item: VideoType) => data.push(item));
-                        setVideo((prev: VideoType[]) => [...prev, ...data]);
+                        setVideo((prev: VideoType[]) => [...prev, ...res.data]);
                     })
                     .catch(() => {});
             } else {
@@ -45,37 +44,32 @@ const Home = (props: Props) => {
                         },
                     })
                     .then((res) => {
-                        const data: VideoType[] = [];
-                        res.data.forEach((item: VideoType) => data.push(item));
-                        setVideo((prev: VideoType[]) => [...prev, ...data]);
+                        setVideo((prev: VideoType[]) => [...prev, ...res.data]);
                     })
                     .catch(() => {});
             }
         };
         fetchApi();
-        window.addEventListener('scroll', (e) => handleScroll(e));
         document.title = 'TikTok - Make Your Day';
     }, [page, like]);
 
-    const handleScroll = (e: any) => {
-        if (
-            window.innerHeight + e.target.documentElement.scrollTop + 1 >=
-            e.target.documentElement.scrollHeight
-        ) {
-            setPage(page + 1);
-        }
-    };
-
     return (
         <div className={cx('wrapper')}>
-            {video &&
-                video.map((item: VideoType, index: number) => (
-                    <Video
-                        key={index}
-                        data={item}
-                        liked={() => setLike(!like)}
-                    />
-                ))}
+            <InfiniteScroll
+                dataLength={video.length}
+                next={() => setPage(page + 1)}
+                hasMore={true}
+                loader={<h4>Loading...</h4>}
+            >
+                {video &&
+                    video.map((item: VideoType, index: number) => (
+                        <Video
+                            key={index}
+                            data={item}
+                            liked={() => setLike(!like)}
+                        />
+                    ))}
+            </InfiniteScroll>
         </div>
     );
 };
