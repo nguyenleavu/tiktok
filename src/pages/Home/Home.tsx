@@ -9,13 +9,14 @@ import { VideoType } from '~/config/@type/type';
 const cx = classNames.bind(styles);
 
 type Props = {};
+const PAGE = 1;
 
 const Home = (props: Props) => {
     const [video, setVideo] = useState<VideoType[]>([]);
-    const [page, setPage] = useState<number>(1);
+    const [page, setPage] = useState<number>(PAGE);
+    const [like, setLike] = useState(false);
 
     const user = useAppSelector((state) => state.login.login?.user);
-
     useEffect(() => {
         const fetchApi = async () => {
             if (user) {
@@ -54,7 +55,7 @@ const Home = (props: Props) => {
         fetchApi();
         window.addEventListener('scroll', (e) => handleScroll(e));
         document.title = 'TikTok - Make Your Day';
-    }, [page]);
+    }, [page, like]);
 
     const handleScroll = (e: any) => {
         if (
@@ -69,7 +70,11 @@ const Home = (props: Props) => {
         <div className={cx('wrapper')}>
             {video &&
                 video.map((item: VideoType, index: number) => (
-                    <Video key={index} data={item} />
+                    <Video
+                        key={index}
+                        data={item}
+                        liked={() => setLike(!like)}
+                    />
                 ))}
         </div>
     );

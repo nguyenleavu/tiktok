@@ -21,9 +21,10 @@ const cx = classNames.bind(styles);
 
 type Props = {
     data: VideoType;
+    liked?: (value: React.SetStateAction<boolean>) => void;
 };
 
-const Video = ({ data }: Props) => {
+const Video = ({ data, liked }: Props) => {
     const videoRef = useRef<any>();
     const volumeRef = useRef<any>();
 
@@ -169,7 +170,7 @@ const Video = ({ data }: Props) => {
                         </div>
                     </div>
                 </div>
-                <ButtonVideo data={data} />
+                <ButtonVideo data={data} liked={liked} />
             </div>
         </div>
     );

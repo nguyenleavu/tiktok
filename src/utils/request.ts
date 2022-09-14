@@ -12,6 +12,11 @@ export const get = async (url: string, options = {}) => {
     return response.data;
 };
 
+export const getWithUser = async (url: string, headers: any) => {
+    const response = await request.get(url, { headers });
+    return response.data;
+};
+
 export const post = async (url: string, data = {}, headers?: any) => {
     const response = await request.post(url, data, headers);
     return response.data;

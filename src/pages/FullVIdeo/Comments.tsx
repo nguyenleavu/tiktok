@@ -18,6 +18,7 @@ const cx = classNames.bind(styles);
 type Props = {
     id: number;
     cmt?: boolean;
+
 };
 
 const Comments = ({ id, cmt }: Props) => {
@@ -41,12 +42,12 @@ const Comments = ({ id, cmt }: Props) => {
             request.post(`comments/${id}/unlike`, id, {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
-            setLike(!like);
+            setLike(!liked);
         } else {
             request.post(`comments/${id}/like`, id, {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
-            setLike(!like);
+            setLike(!liked);
         }
     };
 
@@ -55,6 +56,7 @@ const Comments = ({ id, cmt }: Props) => {
             headers: { Authorization: `Bearer ${user.meta.token}` },
         });
         setLike(!like);
+
     };
 
     return comments.map((comment: any) => (

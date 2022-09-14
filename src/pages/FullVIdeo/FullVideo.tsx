@@ -39,11 +39,13 @@ const FullVideo = (props: Props) => {
     useEffect(() => {
         const fetchApi = async () => {
             await request
-                .get(`videos/${uuid}`)
+                .getWithUser(`videos/${uuid}`, {
+                    Authorization: `Bearer ${user.meta.token}`,
+                })
                 .then((res) => setVideo(res.data));
         };
         fetchApi();
-    }, []);
+    }, [like]);
 
     const handleVideos = () => {
         if (playing) {
@@ -63,13 +65,13 @@ const FullVideo = (props: Props) => {
             headers: { Authorization: `Bearer ${user.meta.token}` },
         });
         setCmt(!cmt);
+        setLike(!like);
         setTextInput('');
         inputRef.current.focus();
     };
 
     const handleLike = () => {
-        setLike(!like);
-        if (like) {
+        if (video.is_liked) {
             request.post(`videos/${video.id}/unlike`, uuid, {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
@@ -78,6 +80,7 @@ const FullVideo = (props: Props) => {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
         }
+        setTimeout(() => setLike(!like), 300);
     };
 
     useEffect(() => {
@@ -175,7 +178,7 @@ const FullVideo = (props: Props) => {
                                 <div className={cx('like-cmt')}>
                                     <button
                                         className={
-                                            like
+                                            video.is_liked
                                                 ? cx('like-btn')
                                                 : cx('unlike-btn')
                                         }
@@ -183,11 +186,7 @@ const FullVideo = (props: Props) => {
                                     >
                                         <HeartIcon />
                                     </button>
-                                    <strong>
-                                        {like
-                                            ? video.likes_count + 1
-                                            : video.likes_count}
-                                    </strong>
+                                    <strong>{video.likes_count}</strong>
                                     <button>
                                         <CMTIcon />
                                     </button>
