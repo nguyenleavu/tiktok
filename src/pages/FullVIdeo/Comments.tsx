@@ -42,12 +42,12 @@ const Comments = ({ id, cmt }: Props) => {
             request.post(`comments/${id}/unlike`, id, {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
-            setLike(!liked);
+            setLike(!like);
         } else {
             request.post(`comments/${id}/like`, id, {
                 headers: { Authorization: `Bearer ${user.meta.token}` },
             });
-            setLike(!liked);
+            setLike(!like);
         }
     };
 
